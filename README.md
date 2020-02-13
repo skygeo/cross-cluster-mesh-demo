@@ -64,10 +64,20 @@ Devops meetup Edi. This is a quick overview of how skyscanner moved to multi-clu
         helm template --set istio.enabled=true --set crosscluster.enabled=true --namespace infrabin ./charts/infrabin | kubectl apply -f -
     ```
 
-1. Full mutual TLS
+1. Full mutual TLS on the gateway
 
     ```bash
-        helm template --set istio.enabled=true --set crosscluster.enabled=true --namespace infrabin ./charts/infrabin | kubectl apply -f -
+        helm template --set istio.enabled=true --set crosscluster.enabled=true --set istio.mtls=true --namespace infrabin ./charts/infrabin | kubectl apply -f -
+    ```
+    
+**testing***
+
+    ```bash
+        # from an injected pod
+        # direct
+        curl infrabin.infrabin/headers | jq .
+        # via the gateways
+        curl infrabin.example.com/headers --resolve infrabin.example.com:80:1.2.3.4 | jq .
     ```
 
 **For more details**
