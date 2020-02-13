@@ -1,6 +1,6 @@
-# How skyscanner moved to multi cluster mesh with istio
+# Multi cluster mesh with istio
 
-Devops meetup Edi. This is a quick overview of how skyscanner moved to multi-cluster mesh using istio.
+Devops meetup Edi. This is a quick overview of how skyscanner moved to multi-cluster mesh using istio and 2 local kubernetes/kind clusters
 
 
 1. Install kind and helm
