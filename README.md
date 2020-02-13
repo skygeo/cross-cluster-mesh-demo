@@ -73,4 +73,8 @@ Devops meetup Edi. This is a quick overview of how skyscanner moved to multi-clu
 **For more details**
 
 1. Kind Documentation
-https://kind.sigs.k8s.io/docs/user/quick-start/
+    https://kind.sigs.k8s.io/docs/user/quick-start/
+1. Istio docs
+    https://istio.io/docs/
+1. k9s
+    https://github.com/derailed/k9s
