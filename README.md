@@ -71,7 +71,6 @@ Devops meetup Edi. This is a quick overview of how skyscanner moved to multi-clu
     ```
     
 **testing**
-
     ```bash
         # from an injected pod
         # direct
@@ -79,6 +78,7 @@ Devops meetup Edi. This is a quick overview of how skyscanner moved to multi-clu
         # via the gateways
         curl infrabin.example.com/headers --resolve infrabin.example.com:80:1.2.3.4 | jq .
     ```
+
 
 **For more details**
 
