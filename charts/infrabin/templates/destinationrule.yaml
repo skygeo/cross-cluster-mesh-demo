@@ -1,0 +1,16 @@
+{{- if .Values.istio.enabled }}
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: infrabin
+  namespace: {{ .Release.Namespace }}
+spec:
+  host: infrabin.example.com
+  trafficPolicy:
+    loadBalancer:
+      simple: ROUND_ROBIN
+    {{- if .Values.istio.mtls }}
+    tls:
+      mode: ISTIO_MUTUAL
+    {{- end }}
+{{- end }}

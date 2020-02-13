@@ -1,0 +1,26 @@
+{{- if .Values.istio.enabled }}
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: infrabin
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector:
+    istio: ingressgateway # use Istio default gateway implementation
+  servers:
+  - port:
+      number: 80
+      name: http
+      {{- if .Values.istio.mtls }}
+      protocol: HTTPS
+      {{- else }}
+      protocol: HTTP
+      {{- end }}
+    hosts:
+    - "*"
+    - "infrabin.example.com"
+    {{- if .Values.istio.mtls }}
+    tls:
+      mode: ISTIO_MUTUAL
+    {{- end }}
+{{- end }}

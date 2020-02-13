@@ -1,0 +1,13 @@
+# Istio chart values
+
+global:
+  controlPlaneSecurityEnabled: true
+  mtls:
+    enabled: true
+prometheus:
+  enabled: false
+mixer:
+  telemetry:
+    enabled: false
+security:
+  selfSigned: false

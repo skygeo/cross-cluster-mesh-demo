@@ -1,0 +1,9 @@
+apiVersion: v1
+appVersion: 0.9.2
+description: Helm chart for infrabin
+keywords:
+- infrabin
+name: infrabin
+sources:
+- https://github.com/maruina/infrabin
+version: 0.9.2

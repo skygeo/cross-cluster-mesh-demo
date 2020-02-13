@@ -1,0 +1,17 @@
+#
+# pilot configuration
+#
+image: maruina/infrabin
+replicaCount: 1
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 100m
+    memory: 128Mi
+istio:
+  enabled: false
+  mtls: false
+crosscluster:
+  enabled: false

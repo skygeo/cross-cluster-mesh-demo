@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: infrabin
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: infrabin
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: infrabin
+  template:
+    metadata:
+      labels:
+        app: infrabin
+      annotations:
+        sidecar.istio.io/rewriteAppHTTPProbers: "true"
+    spec:
+      containers:
+      - name: infrabin
+        image: "{{ .Values.image }}"
+        ports:
+        - name: http-service
+          containerPort: 8080
+        lifecycle:
+          preStop:
+            exec:
+              # > 3 consecutive failures on the readiness probe
+              command: ["sleep","8"]
+        livenessProbe:
+          httpGet:
+            path: /healthcheck/liveness
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /healthcheck/readiness
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 1
+        env:
+        - name: USE_ENVOY_PREFLIGHT
+          value: "{{ .Values.istio.enabled }}"
+        resources:
+{{- if .Values.resources }}
+{{ toYaml .Values.resources | indent 12 }}
+{{- else }}
+{{ toYaml .Values.global.defaultResources | indent 12 }}
+{{- end }}
