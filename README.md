@@ -70,7 +70,7 @@ Devops meetup Edi. This is a quick overview of how skyscanner moved to multi-clu
         helm template --set istio.enabled=true --set crosscluster.enabled=true --set istio.mtls=true --namespace infrabin ./charts/infrabin | kubectl apply -f -
     ```
     
-**testing***
+**testing**
 
     ```bash
         # from an injected pod
