@@ -9,10 +9,22 @@ spec:
   - "infrabin.example.com"
   gateways:
   - infrabin
+  - mesh
   http:
-  - route:
+  - match:
+    - gateways:
+      - infrabin
+    route:
     - destination:
         port:
           number: 80
         host: infrabin.infrabin.svc.cluster.local
+  - match:
+    - gateways:
+      - mesh
+    route:
+    - destination:
+        port:
+          number: 80
+        host: infrabin.example.com
 {{- end }}

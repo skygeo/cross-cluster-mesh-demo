@@ -4,10 +4,15 @@ global:
   controlPlaneSecurityEnabled: true
   mtls:
     enabled: true
+  proxy:
+    accessLogFile: /dev/stdout
+    accessLogEncoding: JSON
 prometheus:
-  enabled: false
+  enabled: true
 mixer:
+  policy:
+    enabled: true
   telemetry:
-    enabled: false
+    enabled: true
 security:
   selfSigned: false

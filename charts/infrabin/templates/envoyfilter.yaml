@@ -1,0 +1,27 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: EnvoyFilter
+metadata:
+  name: authn
+  namespace: istio-system
+spec:
+  configPatches:
+  - applyTo: HTTP_FILTER # http connection manager is a filter in Envoy
+    match:
+      context: GATEWAY
+      listener:
+        portNumber: 80
+        filterChain:
+          filter:
+            name: "envoy.http_connection_manager"
+            subFilter:
+              name: "envoy.filters.http.rbac"
+    patch:
+      operation: INSERT_BEFORE
+      value: # lua filter specification
+        name: "istio_authn"
+        config:
+          "@type": "type.googleapis.com/istio.envoy.config.filter.http.authn.v2alpha1.FilterConfig"
+          policy:
+            peers:
+            - mtls: {}
